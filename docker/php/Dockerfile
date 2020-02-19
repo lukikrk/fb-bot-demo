@@ -64,14 +64,14 @@ RUN docker-php-ext-install \
   xsl \
   zip
 
-  # INSTALL COMPOSER
-  ENV COMPOSER_HOME /usr/local/composer
-  # https://getcomposer.org/doc/03-cli.md#composer-allow-superuser
-  ENV COMPOSER_ALLOW_SUPERUSER 1
-  RUN set -x \
-      && php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
-      && php composer-setup.php --install-dir=/usr/bin --filename=composer \
-      && rm composer-setup.php \
-      && bash -c 'echo -e "{ \"config\" : { \"bin-dir\" : \"/usr/local/bin\" } }\n" > /usr/local/composer/composer.json' \
-      && echo "export COMPOSER_HOME=/usr/local/composer" >> /etc/bash.bashrc \
-      && composer global require "hirak/prestissimo:^0.3" --prefer-dist --no-progress --no-suggest --classmap-authoritative;
+# INSTALL COMPOSER
+ENV COMPOSER_HOME /usr/local/composer
+# https://getcomposer.org/doc/03-cli.md#composer-allow-superuser
+ENV COMPOSER_ALLOW_SUPERUSER 1
+RUN set -x \
+  && php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
+  && php composer-setup.php --install-dir=/usr/bin --filename=composer \
+  && rm composer-setup.php \
+  && bash -c 'echo -e "{ \"config\" : { \"bin-dir\" : \"/usr/local/bin\" } }\n" > /usr/local/composer/composer.json' \
+  && echo "export COMPOSER_HOME=/usr/local/composer" >> /etc/bash.bashrc \
+  && composer global require "hirak/prestissimo:^0.3" --prefer-dist --no-progress --no-suggest --classmap-authoritative;
