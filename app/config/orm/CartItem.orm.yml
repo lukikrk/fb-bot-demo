@@ -1,0 +1,21 @@
+App\Entity\CartItem:
+  type: entity
+  table: cart_items
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  fields:
+    quantity:
+      type: integer
+  manyToOne:
+    cart:
+      targetEntity: Cart
+      inversedBy: items
+      joinColumn:
+        name: cart_id
+    product:
+      targetEntity: Product
+      joinColumn:
+        name: product_id

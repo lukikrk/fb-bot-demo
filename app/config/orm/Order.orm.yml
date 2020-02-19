@@ -1,0 +1,21 @@
+App\Entity\Order:
+  type: entity
+  table: orders
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  oneToOne:
+    cart:
+      targetEntity: Cart
+      inversedBy: order
+      joinColumn:
+        name: cart_id
+  manyToOne:
+    orderAddress:
+      targetEntity: OrderAddress
+      cascade: [persist]
+      joinColumn:
+        name:
+          order_address_id

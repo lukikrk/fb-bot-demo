@@ -1,0 +1,21 @@
+App\Entity\Cart:
+  type: entity
+  table: carts
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  oneToOne:
+    user:
+      targetEntity: FacebookUser
+      inversedBy: cart
+      joinColumn:
+        name: facebook_user_id
+    order:
+      targetEntity: Order
+      mappedBy: cart
+  oneToMany:
+    items:
+      targetEntity: CartItem
+      mappedBy: cart

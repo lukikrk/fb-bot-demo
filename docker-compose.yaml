@@ -1,0 +1,30 @@
+version: "3"
+
+services:
+  nginx:
+    build: ./docker/nginx
+    container_name: fb_bot_demo_nginx
+    ports:
+      - 127.0.0.102:80:80
+    volumes:
+      - ./app:/opt/app
+    depends_on:
+      - php
+
+  php:
+    build: ./docker/php
+    container_name: fb_bot_demo_php
+    volumes:
+      - ./app:/opt/app
+    depends_on:
+      - mysql
+
+  mysql:
+    image: mysql:5.7
+    container_name: fb_bot_mysql
+    restart: on-failure
+    environment:
+      MYSQL_ROOT_PASSWORD: test
+      MYSQL_DATABASE: fb_bot_demo
+      MYSQL_USER: test
+      MYSQL_PASSWORD: test

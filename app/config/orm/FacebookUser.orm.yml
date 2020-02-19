@@ -1,0 +1,27 @@
+App\Entity\FacebookUser:
+  type: entity
+  table: facebook_users
+  repositoryClass: App\Repository\FacebookUserRepository
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  fields:
+    facebookId:
+      type: string
+    firstName:
+      type: string
+    lastName:
+      type: string
+    profilePic:
+      type: string
+    locale:
+      type: string
+    questionId:
+      type: string
+      nullable: true
+  oneToOne:
+    cart:
+      targetEntity: Cart
+      mappedBy: user
