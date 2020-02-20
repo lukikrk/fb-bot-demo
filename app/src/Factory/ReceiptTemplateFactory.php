@@ -27,7 +27,7 @@ class ReceiptTemplateFactory
         )->setAddress($this->createReceiptAddress($order->orderAddress()));
     }
 
-    private function createReceiptElements(array $cartItems): array
+    private function createReceiptElements(iterable $cartItems): array
     {
         foreach ($cartItems as $item) {
             $product = $item->product();
