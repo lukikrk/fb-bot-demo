@@ -6,6 +6,8 @@ namespace App\Messenger\Enum;
 
 class PayloadEnum
 {
+    public const GREETING = 'GREETING';
+
     public const GOSSIP_WANT_TO_ADD = 'GOSSIP_WANT_TO_ADD';
     public const GOSSIP_DONT_WANT_TO_ADD = 'GOSSIP_DONT_WANT_TO_ADD';
 

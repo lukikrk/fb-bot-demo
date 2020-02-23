@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Command;
 
+use App\Messenger\Enum\PayloadEnum;
 use App\Proxy\MessengerProxy;
 use Exception;
 use Kerox\Messenger\Messenger;
@@ -45,7 +46,7 @@ class SetGetStartedButtonCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         try {
-            $profileSettings = ProfileSettings::create()->addStartButton('GREETING');
+            $profileSettings = ProfileSettings::create()->addStartButton(PayloadEnum::GREETING);
             $this->messenger->profile()->add($profileSettings);
 
             $output->writeln('<info>Get started button has been set correctly.</info>');

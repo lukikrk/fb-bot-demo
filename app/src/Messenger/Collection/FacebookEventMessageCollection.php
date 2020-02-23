@@ -7,6 +7,7 @@ namespace App\Messenger\Collection;
 use App\Messenger\Message\AddGossip;
 use App\Messenger\Message\AddProductToCart;
 use App\Messenger\Message\Gossips;
+use App\Messenger\Message\Greeting;
 use App\Messenger\Message\Hello;
 use App\Messenger\Message\DontWantToAddGossip;
 use App\Messenger\Message\WantToAddGossip;
@@ -32,5 +33,6 @@ class FacebookEventMessageCollection
         ShowCart::class,
         MakeOrder::class,
         PaymentMethod::class,
+        Greeting::class,
     ];
 }
