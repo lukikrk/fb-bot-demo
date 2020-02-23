@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Messenger\MessageHandler;
 
+use App\Messenger\Enum\PayloadEnum;
 use App\Messenger\Message\Gossips;
 use App\Proxy\MessengerProxy;
 use App\Repository\GossipRepository;
@@ -26,27 +27,24 @@ class GossipsHandler extends AbstractFacebookEventHandler implements MessageHand
     public function __invoke(Gossips $message)
     {
         $this->messenger->send()->action($message->sender(), Send::SENDER_ACTION_TYPING_ON);
-
         $this->messenger->send()->message($message->sender(), 'Nie uwierzysz, ale...');
 
         foreach ($this->gossipRepository->findAll() as $gossip) {
             $this->messenger->send()->action($message->sender(), Send::SENDER_ACTION_TYPING_ON);
-
             $this->messenger->send()->message($message->sender(), $gossip->text());
         }
 
         $this->messenger->send()->action($message->sender(), Send::SENDER_ACTION_TYPING_ON);
-
         $this->messenger->send()->message(
             $message->sender(),
             (new Message('Czy masz może jakieś plotki do sprzedania?'))
                 ->setQuickReplies([
                     QuickReply::create(QuickReply::CONTENT_TYPE_TEXT)
                         ->setTitle('Tak')
-                        ->setPayload('GOSSIP_I_WANT_TO_ADD'),
+                        ->setPayload(PayloadEnum::GOSSIP_WANT_TO_ADD),
                     QuickReply::create(QuickReply::CONTENT_TYPE_TEXT)
                         ->setTitle('Nie')
-                        ->setPayload('GOSSIP_I_DO_NOT_WANT_TO_ADD'),
+                        ->setPayload(PayloadEnum::GOSSIP_DONT_WANT_TO_ADD),
                 ])
         );
     }

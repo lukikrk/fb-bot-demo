@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Messenger\MessageHandler;
 
 use App\Entity\OrderAddress;
+use App\Messenger\Enum\QuestionIdEnum;
 use App\Messenger\Message\OrderAddressStreet;
 use App\Proxy\MessengerProxy;
 use App\Service\FacebookUserService;
@@ -39,7 +40,7 @@ class OrderAddressStreetHandler extends AbstractFacebookEventHandler implements 
         $order = $user->cart()->order();
 
         $order->update(new OrderAddress($message->content()), null);
-        $user->update('ORDER_ADDRESS_ZIP_QUESTION');
+        $user->update(QuestionIdEnum::ORDER_ADDRESS_ZIP_QUESTION);
 
         $this->entityManager->flush();
 

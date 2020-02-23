@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Messenger\MessageHandler;
 
+use App\Messenger\Enum\PayloadEnum;
 use App\Messenger\Message\Products;
 use App\Proxy\MessengerProxy;
 use App\Repository\ProductRepository;
@@ -26,12 +27,14 @@ class ProductsHandler extends AbstractFacebookEventHandler implements MessageHan
 
     public function __invoke(Products $message)
     {
+         $this->messenger->send()->action($message->sender(), Send::SENDER_ACTION_TYPING_ON);
+
         foreach ($this->productRepository->findAll() as $product) {
             $elements[] = GenericElement::create($product->name())
                 ->setSubtitle(number_format($product->price(), 2).'zł')
                 ->setImageUrl($product->imageUrl())
                 ->setButtons([
-                    Postback::create('Kup', 'CART-ADD-'.$product->id())
+                    Postback::create('Kup', sprintf(PayloadEnum::CART_ADD_PRODUCT, $product->id()))
                 ]);
         }
 

@@ -8,8 +8,8 @@ use App\Messenger\Message\AddGossip;
 use App\Messenger\Message\AddProductToCart;
 use App\Messenger\Message\Gossips;
 use App\Messenger\Message\Hello;
-use App\Messenger\Message\IDoNotWantToAddGossip;
-use App\Messenger\Message\IWantToAddGossip;
+use App\Messenger\Message\DontWantToAddGossip;
+use App\Messenger\Message\WantToAddGossip;
 use App\Messenger\Message\MakeOrder;
 use App\Messenger\Message\OrderAddressStreet;
 use App\Messenger\Message\OrderAddressZip;
@@ -26,8 +26,8 @@ class FacebookEventMessageCollection
         Hello::class,
         Gossips::class,
         Products::class,
-        IWantToAddGossip::class,
-        IDoNotWantToAddGossip::class,
+        WantToAddGossip::class,
+        DontWantToAddGossip::class,
         AddProductToCart::class,
         ShowCart::class,
         MakeOrder::class,

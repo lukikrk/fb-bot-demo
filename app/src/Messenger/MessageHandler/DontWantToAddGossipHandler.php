@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Messenger\MessageHandler;
 
-use App\Messenger\Message\IDoNotWantToAddGossip;
+use App\Messenger\Message\DontWantToAddGossip;
 use App\Proxy\MessengerProxy;
 use App\Repository\ProductRepository;
 use Kerox\Messenger\Api\Send;
@@ -13,7 +13,7 @@ use Kerox\Messenger\Model\Message\Attachment\Template\Element\GenericElement;
 use Kerox\Messenger\Model\Message\Attachment\Template\GenericTemplate;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
-class IDoNotWantToAddGossipHandler extends AbstractFacebookEventHandler implements MessageHandlerInterface
+class DontWantToAddGossipHandler extends AbstractFacebookEventHandler implements MessageHandlerInterface
 {
     private ProductRepository $productRepository;
 
@@ -24,7 +24,7 @@ class IDoNotWantToAddGossipHandler extends AbstractFacebookEventHandler implemen
         $this->productRepository = $productRepository;
     }
 
-    public function __invoke(IDoNotWantToAddGossip $message)
+    public function __invoke(DontWantToAddGossip $message)
     {
         $this->messenger->send()->action($message->sender(), Send::SENDER_ACTION_TYPING_ON);
 

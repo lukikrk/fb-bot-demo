@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Messenger\MessageHandler;
 
 use App\Entity\Order;
+use App\Messenger\Enum\QuestionIdEnum;
 use App\Messenger\Message\MakeOrder;
 use App\Proxy\MessengerProxy;
 use App\Service\FacebookUserService;
@@ -42,7 +43,7 @@ class MakeOrderHandler extends AbstractFacebookEventHandler implements MessageHa
             $order = new Order($user, $user->cart());
         }
 
-        $user->update('ORDER_ADDRESS_STREET_QUESTION');
+        $user->update(QuestionIdEnum::ORDER_ADDRESS_STREET_QUESTION);
 
         $this->entityManager->persist($order);
         $this->entityManager->flush();

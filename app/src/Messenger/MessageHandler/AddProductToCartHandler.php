@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Messenger\MessageHandler;
 
+use App\Messenger\Enum\PayloadEnum;
 use App\Messenger\Message\AddProductToCart;
 use App\Proxy\MessengerProxy;
 use App\Repository\ProductRepository;
@@ -46,8 +47,8 @@ class AddProductToCartHandler extends AbstractFacebookEventHandler implements Me
         $this->messenger->send()->action($message->sender(), Send::SENDER_ACTION_TYPING_ON);
         $this->messenger->send()->message($message->sender(), 'Produkt został dodany do koszyka');
         $this->messenger->send()->message($message->sender(), ButtonTemplate::create('Co teraz chcesz zrobić?', [
-            Postback::create('Pokaż koszyk', 'SHOW-CART'),
-            Postback::create('Złóż zamówienie', 'MAKE-ORDER'),
+            Postback::create('Pokaż koszyk', PayloadEnum::SHOW_CART),
+            Postback::create('Złóż zamówienie', PayloadEnum::MAKE_ORDER),
         ]));
     }
 }
