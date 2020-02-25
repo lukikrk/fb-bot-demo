@@ -45,6 +45,6 @@ class OrderAddressStreetHandler extends AbstractFacebookEventHandler implements 
         $this->entityManager->flush();
 
         $this->messenger->send()->action($message->sender(), Send::SENDER_ACTION_TYPING_ON);
-        $this->messenger->send()->message($message->sender(), 'Doskonale! Teraz podaj kod pocztowy');
+        $this->messenger->send()->message($message->sender(), 'Doskonale! Teraz podaj kod pocztowy ✉');
     }
 }

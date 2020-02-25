@@ -15,13 +15,13 @@ class GreetingHandler extends AbstractFacebookEventHandler implements MessageHan
         $this->messenger->send()->action($message->sender(), Send::SENDER_ACTION_TYPING_ON);
 
         $this->messenger->send()->message($message->sender(),
-            'Cześć ' . $this->messenger->user()->profile($message->sender())->getFirstName()
+            'Cześć ' . $this->messenger->user()->profile($message->sender())->getFirstName() . "👋"
         );
 
         $this->messenger->send()->action($message->sender(), Send::SENDER_ACTION_TYPING_ON);
 
         $this->messenger->send()->message($message->sender(),
-            'Czym mogę służyć? Chcesz zrobić zakupy czy interesują Cię plotki?'
+            'Czym mogę służyć? Chcesz zrobić zakupy 🛒 czy interesują Cię plotki? 🗣'
         );
     }
 }

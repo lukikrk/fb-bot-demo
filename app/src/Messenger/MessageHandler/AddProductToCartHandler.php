@@ -45,9 +45,9 @@ class AddProductToCartHandler extends AbstractFacebookEventHandler implements Me
         $this->cartService->addProductToCart($cart, $product);
 
         $this->messenger->send()->action($message->sender(), Send::SENDER_ACTION_TYPING_ON);
-        $this->messenger->send()->message($message->sender(), 'Produkt został dodany do koszyka');
+        $this->messenger->send()->message($message->sender(), 'Produkt został dodany do koszyka 🛒');
         $this->messenger->send()->message($message->sender(), ButtonTemplate::create('Co teraz chcesz zrobić?', [
-            Postback::create('Pokaż koszyk', PayloadEnum::SHOW_CART),
+            Postback::create('Pokaż koszyk 🛒', PayloadEnum::SHOW_CART),
             Postback::create('Złóż zamówienie', PayloadEnum::MAKE_ORDER),
         ]));
     }

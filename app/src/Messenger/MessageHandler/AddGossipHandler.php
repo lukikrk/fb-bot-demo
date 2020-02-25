@@ -46,6 +46,6 @@ class AddGossipHandler extends AbstractFacebookEventHandler implements MessageHa
         $this->entityManager->flush();
 
         $this->messenger->send()->action($message->sender(), Send::SENDER_ACTION_TYPING_ON);
-        $this->messenger->send()->message($message->sender(), 'Ale numer! Tego nie wiedziałam!');
+        $this->messenger->send()->message($message->sender(), 'Ale numer! Tego nie wiedziałam! :O');
     }
 }

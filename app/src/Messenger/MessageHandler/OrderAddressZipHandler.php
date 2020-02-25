@@ -60,7 +60,7 @@ class OrderAddressZipHandler extends AbstractFacebookEventHandler implements Mes
         $this->messenger->send()->action($message->sender(), Send::SENDER_ACTION_TYPING_ON);
         $this->messenger->send()->message(
             $message->sender(),
-            (new Message('Super! Teraz wybierz formę płatności'))
+            (new Message('Super! Teraz wybierz formę płatności 💰'))
                 ->setQuickReplies($paymentMethods)
         );
     }

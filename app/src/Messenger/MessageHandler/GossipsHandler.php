@@ -27,7 +27,7 @@ class GossipsHandler extends AbstractFacebookEventHandler implements MessageHand
     public function __invoke(Gossips $message)
     {
         $this->messenger->send()->action($message->sender(), Send::SENDER_ACTION_TYPING_ON);
-        $this->messenger->send()->message($message->sender(), 'Nie uwierzysz, ale...');
+        $this->messenger->send()->message($message->sender(), 'Nie uwierzysz, ale... 😱');
 
         foreach ($this->gossipRepository->findAll() as $gossip) {
             $this->messenger->send()->action($message->sender(), Send::SENDER_ACTION_TYPING_ON);

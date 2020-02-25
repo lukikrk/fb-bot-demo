@@ -50,7 +50,7 @@ class MakeOrderHandler extends AbstractFacebookEventHandler implements MessageHa
 
         $this->messenger->send()->action($message->sender(), Send::SENDER_ACTION_TYPING_ON);
 
-        $this->messenger->send()->message($message->sender(), 'Czas na odres dostawy');
-        $this->messenger->send()->message($message->sender(), 'Podaj ulicę');
+        $this->messenger->send()->message($message->sender(), 'Czas na odres dostawy 📦');
+        $this->messenger->send()->message($message->sender(), 'Podaj ulicę 🏠');
     }
 }
