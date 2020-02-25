@@ -19,6 +19,11 @@ class CartItem extends AbstractEntity
         $this->quantity = $quantity;
     }
 
+    public function update(int $quantity): void
+    {
+        $this->quantity = $quantity;
+    }
+
     public function product(): Product
     {
         return $this->product;

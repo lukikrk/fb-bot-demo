@@ -7,6 +7,7 @@ namespace App\Service;
 use App\Entity\Cart;
 use App\Entity\CartItem;
 use App\Entity\Product;
+use App\Repository\CartItemRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
 class CartService
@@ -15,14 +16,21 @@ class CartService
 
     private EntityManagerInterface $entityManager;
 
+    private CartItemRepository $cartItemRepository;
+
     /**
      * @param FacebookUserService $facebookUserService
      * @param EntityManagerInterface $entityManager
+     * @param CartItemRepository $cartItemRepository
      */
-    public function __construct(FacebookUserService $facebookUserService, EntityManagerInterface $entityManager)
-    {
+    public function __construct(
+        FacebookUserService $facebookUserService,
+        EntityManagerInterface $entityManager,
+        CartItemRepository $cartItemRepository
+    ) {
         $this->facebookUserService = $facebookUserService;
         $this->entityManager = $entityManager;
+        $this->cartItemRepository = $cartItemRepository;
     }
 
     public function obtainCartForFacebookUser(string $facebookId): Cart
@@ -41,9 +49,15 @@ class CartService
 
     public function addProductToCart(Cart $cart, Product $product): void
     {
-        $cartItem = new CartItem($cart, $product);
+        $cartItem = $this->cartItemRepository->findOneBy(['cart' => $cart, 'product' => $product]);
 
-        $this->entityManager->persist($cartItem);
+        if (!$cartItem) {
+            $cartItem = new CartItem($cart, $product);
+            $this->entityManager->persist($cartItem);
+        } else {
+            $cartItem->update($cartItem->quantity() + 1);
+        }
+
         $this->entityManager->flush();
     }
 }
